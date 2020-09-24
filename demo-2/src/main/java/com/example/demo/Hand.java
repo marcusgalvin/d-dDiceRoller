@@ -9,7 +9,7 @@ public class Hand {
 	private int size;
 	
 	public Hand(int size) {
-	    size = 6;
+	    size = 5;
 		
 	}
 	
