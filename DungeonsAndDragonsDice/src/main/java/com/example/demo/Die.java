@@ -1,23 +1,60 @@
 package com.example.demo;
 
-import java.util.List;
 import java.util.Random;
 
 public class Die {
-    private int sides = 20;
-    private int value;
+	private int sides;
+	private int value;
+	String diceConfig;
+	int damage;
+	
+	public Die() {
+		this.sides = 20;
+		this.value = 1;
+		
+	}
+	
+	
+	 public int roll(String diceConfig) {
+//	    	String diceConfig = "2d4";
 
-    public Die() {
-        this.value = 1;
-    }
+	    	Random rand = new Random();
+	    	int value = 0;
+	    	
+	    	int d = diceConfig.indexOf('d');
+	    	int numberOfSides = 1;
+	    	
+	    	String tempMultiplyer = diceConfig.substring(0, d);
+	    	
+	    	numberOfSides = Integer.parseInt(diceConfig.substring(d + 1));
+//	    	System.out.println("number of sides: " + numberOfSides);
+	    	
+	    	int numberOfRolls = Integer.parseInt(tempMultiplyer);
+//	    	System.out.println("number of rolls : " + numberOfRolls);
+	    	
+	    	for(int i = 0; i < numberOfRolls; i++) {
+	    		int roll = rand.nextInt(numberOfSides) + 1;
+	    		value += roll;
+
+	    	}
+//	    	System.out.println("damage roll value: " + value);
+
+	    	return value;
+	    	
+	    	
+	    }
+		
 
     public void roll(Random rand) {
         value = rand.nextInt(sides) + 1;
+       
+        
     }
 
-    public int getValue() {
-    	System.out.println(value);
-    	
+    public int getValue() {    	
         return value;
     }
+	
+	
+
 }

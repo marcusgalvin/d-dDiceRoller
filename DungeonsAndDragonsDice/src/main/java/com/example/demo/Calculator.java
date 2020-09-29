@@ -2,40 +2,33 @@ package com.example.demo;
 
 import java.util.Random;
 
-public class Calculator extends D20 {
+public class Calculator extends Die {
 	private int ac;
 	private int defMod;
 	private int attMod;
-//	private String damageDice;
-	private D20 die = new D20();
-	private DamageDice damageDie = new DamageDice();
+	private Die d20 = new Die();
+	private Die damageDie = new Die();
 	private int damage;
 	int enemysDefense;
 	
-	public Calculator() {
-		this.ac = ac;
-		this.defMod = defMod;
-		this.attMod = attMod;
-//		this.damageDice = damageDice;
-		
-	}
+
 	
 	
 	public int attack(int ac, int defMod, int attMod, String damageDice) {
 		Random rand = new Random();
 		
 		//roll the d20
-		die.roll(rand);
-		int d20 = die.getValue();
-		System.out.println("D20: " + d20);
+		d20.roll(rand);
+		d20.getValue();
+		System.out.println("D20: " + d20.getValue());
 		
 		//init enemy's def
 		enemysDefense = ac + defMod;
 
-		DamageDice damageDiceOne = new DamageDice();
+		Die damageDiceOne = new Die();
 
 		
-		if(d20 + attMod > enemysDefense) {
+		if(d20.getValue() + attMod > enemysDefense) {
 			System.out.println("The Attack Lands on enemy!");
 			damageDiceOne.roll(damageDice);
 			
@@ -45,11 +38,11 @@ public class Calculator extends D20 {
 		}
 		
 		
-		if(d20 == 20) {
+		if(d20.getValue() == 20) {
 			System.out.println("Critical Hit, roll damage twice");
 			int damageOne = damageDiceOne.getValue();
 			System.out.println("damaged for: " + damageOne);
-			DamageDice damageDiceTwo = new DamageDice();
+			Die damageDiceTwo = new Die();
 			int damageTwo = damageDiceTwo.roll(damageDice);
 			System.out.println("Second attack hits enemy for: " + damageTwo + " damage!");
 			
@@ -59,14 +52,14 @@ public class Calculator extends D20 {
 			
 		}
 
-		if(d20 == 1) {
+		if(d20.getValue() == 1) {
 			damage = 0;
 			System.out.println("Citical Miss, 0 damage delt. " + damage + " is delt");
 			return damage;
 		}
 		
 		
-		if(d20 > 1 && die.getValue() <= 19) {
+		if(d20.getValue() > 1 && d20.getValue() <= 19) {
 			damage = damageDiceOne.roll(damageDice);
 
 			System.out.println("Hit enemy for " + damage + " damage!");
