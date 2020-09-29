@@ -2,48 +2,47 @@ package com.example.demo;
 
 import java.util.Random;
 
-public class DamageDice extends Die {
+public class DamageDice  {
 	private int sides;
 	private int value;
-	private int test;
 	String dieConfig;
 	String damage;
 	
 	public DamageDice() {
 		super();
 		this.sides = 1;
-		this.test = test;
 		
 	}
 		
 
     public void roll(Random rand) {
-        value = rand.nextInt(sides) + 1;
-       
+        value = rand.nextInt(sides) + 1;      
         
     }
     
     public int roll(String diceConfig) {
+//    	String diceConfig = "2d4";
+
     	Random rand = new Random();
-//    	String dieConfig = "2d4";
     	int value = 0;
     	
     	int d = diceConfig.indexOf('d');
     	int numberOfSides = 1;
+    	
     	String tempMultiplyer = diceConfig.substring(0, d);
     	
     	numberOfSides = Integer.parseInt(diceConfig.substring(d + 1));
 //    	System.out.println("number of sides: " + numberOfSides);
     	
-    	int test = Integer.parseInt(tempMultiplyer);
-//    	System.out.println("multiplyer : " + test);
+    	int numberOfRolls = Integer.parseInt(tempMultiplyer);
+//    	System.out.println("number of rolls : " + numberOfRolls);
     	
-    	for(int i = 0; i <= test; i++) {
-    		int rollDice = rand.nextInt(numberOfSides) + 1;
-    		value += rollDice;
+    	for(int i = 0; i < numberOfRolls; i++) {
+    		int roll = rand.nextInt(numberOfSides) + 1;
+    		value += roll;
 
     	}
-    	System.out.println("damage roll value: " + value);
+//    	System.out.println("damage roll value: " + value);
 
     	return value;
     	

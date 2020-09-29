@@ -9,9 +9,9 @@ public class Main {
 		Calculator calc = new Calculator();
 		
 		
-		calc.isHit(rand);
+//		calc.isHit(rand);
 		
-		calc.attack(2, 2, 2, "2d4");
+		calc.attack(1, 1, 1, "2d4");
 
 //		DamageDice test = new DamageDice();
 //		test.roll("2d4");

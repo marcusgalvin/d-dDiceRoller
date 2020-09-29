@@ -10,7 +10,7 @@ public class Calculator extends D20 {
 	private D20 die = new D20();
 	private DamageDice damageDie = new DamageDice();
 	private int damage;
-	int enemysDefense = ac + attMod;
+	int enemysDefense;
 	
 	public Calculator() {
 		this.ac = ac;
@@ -21,57 +21,58 @@ public class Calculator extends D20 {
 	}
 	
 	
-	
-	public void isHit(Random rand) {
+	public int attack(int ac, int defMod, int attMod, String damageDice) {
+		Random rand = new Random();
+		
+		//roll the d20
 		die.roll(rand);
-		damageDie.roll(rand);
-
-		System.out.println("D20 Die roll: " + die.getValue());
-		if(die.getValue() == 20) {
-			System.out.println("Critical Hit!");
-		} else if(die.getValue() == 1) {
-			System.out.println("Miss!");
-		} else {
-//			System.out.println("other(non miss), apply mods");
-		}
-	}
-	
-	public void attack(int ac, int defMod, int attMod, String damageDice) {
-		System.out.println("Enemy Defense value: " + enemysDefense);
-		System.out.println("Player's attack modifier: " + attMod);
+		int d20 = die.getValue();
+		System.out.println("D20: " + d20);
 		
+		//init enemy's def
+		enemysDefense = ac + defMod;
+
 		DamageDice damageDiceOne = new DamageDice();
-		damageDiceOne.roll(damageDice);
-		
-		
 
-		if(die.getValue() == 1) {
-			damage = 0;
-			System.out.println("Miss, 0 damage delt. " + damage + " is delt");
+		
+		if(d20 + attMod > enemysDefense) {
+			System.out.println("The Attack Lands on enemy!");
+			damageDiceOne.roll(damageDice);
+			
+		} else {
+			System.out.println("Attack Misses enemy!");
+			System.exit(0);
 		}
 		
 		
-		if(die.getValue() > 1 && die.getValue() <= 19) {
-			damage = damageDiceOne.roll(damageDice) + attMod;
+		if(d20 == 20) {
+			System.out.println("Critical Hit, roll damage twice");
+			int damageOne = damageDiceOne.getValue();
+			System.out.println("damaged for: " + damageOne);
+			DamageDice damageDiceTwo = new DamageDice();
+			int damageTwo = damageDiceTwo.roll(damageDice);
+			System.out.println("Second attack hits enemy for: " + damageTwo + " damage!");
+			
+			int rolledA20 = damageOne + damageTwo;
+
+			System.out.println("For a total damage of: " + rolledA20);
+			
+		}
+
+		if(d20 == 1) {
+			damage = 0;
+			System.out.println("Citical Miss, 0 damage delt. " + damage + " is delt");
+			return damage;
+		}
+		
+		
+		if(d20 > 1 && die.getValue() <= 19) {
+			damage = damageDiceOne.roll(damageDice);
 
 			System.out.println("Hit enemy for " + damage + " damage!");
 		}
-		
-		if(die.getValue() == 20) {
-			damage = damageDiceOne.getValue();
-			DamageDice damageDiceTwo = new DamageDice();
-			damageDiceTwo.roll(damageDice);
-			System.out.println("dd2" + damageDiceTwo.getValue());
-			
-			int rolledA20 = damageDiceOne.getValue() + damageDiceTwo.getValue();
-
-			System.out.println("die value after mod: " + rolledA20);
-			
-		}
-		
-		if(damage + attMod >= enemysDefense) {
-			System.out.println("Target Hit");
-		}
+				
+		return damage;
 		
 	}
 
