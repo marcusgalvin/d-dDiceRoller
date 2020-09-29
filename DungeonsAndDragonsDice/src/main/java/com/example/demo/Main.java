@@ -5,16 +5,13 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) {
-		Random rand = new Random();
+		
 		Calculator calc = new Calculator();
-		
-		
-//		calc.isHit(rand);
-		
+				
+		//(AC, defMod, attMod, damageDice)
 		calc.attack(1, 1, 1, "2d4");
 
-//		DamageDice test = new DamageDice();
-//		test.roll("2d4");
+
 	}
 
 }

@@ -3,11 +3,8 @@ package com.example.demo;
 import java.util.Random;
 
 public class Calculator extends Die {
-	private int ac;
-	private int defMod;
-	private int attMod;
+
 	private Die d20 = new Die();
-	private Die damageDie = new Die();
 	private int damage;
 	int enemysDefense;
 	
@@ -19,7 +16,6 @@ public class Calculator extends Die {
 		
 		//roll the d20
 		d20.roll(rand);
-		d20.getValue();
 		System.out.println("D20: " + d20.getValue());
 		
 		//init enemy's def
@@ -40,16 +36,20 @@ public class Calculator extends Die {
 		
 		if(d20.getValue() == 20) {
 			System.out.println("Critical Hit, roll damage twice");
-			int damageOne = damageDiceOne.getValue();
-			System.out.println("damaged for: " + damageOne);
+			
+			Die damageAttackOne = new Die();
+			int damageAttOne = damageDiceOne.roll(damageDice);
+			System.out.println("First attack hits enemy for: " + damageAttOne + " damage!");
+			
+			
 			Die damageDiceTwo = new Die();
 			int damageTwo = damageDiceTwo.roll(damageDice);
-			System.out.println("Second attack hits enemy for: " + damageTwo + " damage!");
+			System.out.println("The Second attack hits enemy for " + + damageTwo);
 			
-			int rolledA20 = damageOne + damageTwo;
+			int rolledA20 = damageAttOne + damageTwo;
 
 			System.out.println("For a total damage of: " + rolledA20);
-			
+			return rolledA20;
 		}
 
 		if(d20.getValue() == 1) {
@@ -63,6 +63,7 @@ public class Calculator extends Die {
 			damage = damageDiceOne.roll(damageDice);
 
 			System.out.println("Hit enemy for " + damage + " damage!");
+			return damage;
 		}
 				
 		return damage;

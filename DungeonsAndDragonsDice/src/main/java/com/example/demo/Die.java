@@ -5,14 +5,19 @@ import java.util.Random;
 public class Die {
 	private int sides;
 	private int value;
-	String diceConfig;
-	int damage;
+
 	
 	public Die() {
 		this.sides = 20;
 		this.value = 1;
 		
 	}
+	
+	  public void roll(Random rand) {
+	    value = rand.nextInt(sides) + 1;
+	             
+	}
+
 	
 	
 	 public int roll(String diceConfig) {
@@ -45,12 +50,7 @@ public class Die {
 	    }
 		
 
-    public void roll(Random rand) {
-        value = rand.nextInt(sides) + 1;
-       
-        
-    }
-
+  
     public int getValue() {    	
         return value;
     }
