@@ -6,7 +6,7 @@ public class Calculator extends Die {
 
 	private Die d20 = new Die();
 	private int damage;
-	int enemysDefense;
+	private int enemysDefense;
 	
 
 	
@@ -30,7 +30,7 @@ public class Calculator extends Die {
 			
 		} else {
 			System.out.println("Attack Misses enemy!");
-			System.exit(0);
+//			System.exit(0);
 		}
 		
 		
